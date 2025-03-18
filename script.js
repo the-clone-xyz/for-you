@@ -55,6 +55,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function showEffects() {
     document.body.classList.add("bg-show");
+    document
+      .querySelector('meta[name="theme-color"]')
+      .setAttribute("content", "pink");
+
     for (let i = 0; i < 20; i++) {
       setTimeout(createHeart, i * 150);
     }
