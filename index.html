@@ -128,6 +128,7 @@
         const audio = document.getElementById("myAudio");
         setTimeout(() => {
           document.getElementById("myAudio").remove();
+          text.innerHTML = "proud of u <i class='fa fa-heart text-white'></i>";
         }, 58770);
 
         text.style.fontFamily = "monospace";
@@ -162,6 +163,10 @@
                 "-Yang Ku Mau Memberikan Seluruh Cinta Sampai Akhir Waktu Nanti",
             },
           ];
+
+          setInterval(() => {
+            text.classList.remove("fade-text");
+          }, 2000);
 
           texts.forEach(({ time, content, effect }) => {
             setTimeout(() => {
