@@ -3,11 +3,103 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>For You</title>
+    <title>my crush</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
     <link rel="stylesheet" href="fontawesome-free/css/all.css" />
-    <style></style>
+    <style>
+      body {
+        overflow: hidden;
+        background-color: #111;
+      }
+
+      #text {
+        color: white;
+        font-size: 24px;
+        font-weight: bold;
+        transition: all 0.5s ease-in-out;
+      }
+
+      /* Efek animasi hati */
+      .heart {
+        position: absolute;
+        color: red;
+        text-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
+        animation: floatUp 2.5s ease-in-out forwards, bounce 0.6s ease-out;
+        opacity: 0.8;
+      }
+
+      @keyframes floatUp {
+        0% {
+          transform: translateY(50px) scale(0.7);
+          opacity: 1;
+        }
+
+        100% {
+          transform: translateY(-200px) scale(1.2);
+          opacity: 0;
+        }
+      }
+
+      @keyframes bounce {
+        0% {
+          transform: scale(0.5);
+        }
+
+        50% {
+          transform: scale(1.2);
+        }
+
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      /* Efek Partikel */
+      .particle {
+        position: absolute;
+        width: 5px;
+        height: 5px;
+        background: rgba(255, 255, 255, 0.8);
+        border-radius: 50%;
+        animation: particleMove 2s linear forwards;
+      }
+
+      @keyframes particleMove {
+        0% {
+          transform: translateY(0) scale(1);
+          opacity: 1;
+        }
+
+        100% {
+          transform: translateY(-150px) scale(0.5);
+          opacity: 0;
+        }
+      }
+
+      /* Efek api */
+      .fire {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background: orange;
+        border-radius: 50%;
+        opacity: 0.8;
+        animation: fireMove 2s linear forwards;
+      }
+
+      @keyframes fireMove {
+        0% {
+          transform: translateY(0) scale(1);
+          opacity: 1;
+        }
+
+        100% {
+          transform: translateY(200px) scale(0.5);
+          opacity: 0;
+        }
+      }
+    </style>
   </head>
   <body>
     <section id="section">
@@ -16,7 +108,7 @@
           <div class="col-md-6 align-self-center text-center">
             <button
               id="btn"
-              style="width: 50px; height: 50px; display: none"
+              style="width: 50px; height: 50px"
               class="bg-danger rounded-5 text-white border-0"
             >
               <i class="fa fa-play"></i>
@@ -27,12 +119,71 @@
       </div>
     </section>
 
-    <audio id="myAudio" preload="auto">
+    <audio id="myAudio">
       <source src="audio.mp3" type="audio/mpeg" />
     </audio>
 
     <script src="bootstrap/js/bootstrap.bundle.js"></script>
     <script src="sweetalert2/sweetalert2.all.min.js"></script>
-    <script src="script.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const btn = document.getElementById("btn");
+        const text = document.getElementById("text");
+        const section = document.getElementById("section");
+
+        text.style.fontFamily = "monospace";
+
+        btn.addEventListener("click", () => {
+          document.getElementById("myAudio").play();
+          btn.remove();
+          setInterval(() => {
+            text.classList.remove("fade-text");
+          }, 700);
+
+          setTimeout(() => {
+            document.getElementById("myAudio").remove();
+            text.innerHTML = `proud of u <i class="fa fa-heart text-white"></i> `;
+            text.classList.add("fade-text");
+          }, 58770);
+
+          get_text();
+        });
+
+        function get_text() {
+          setTimeout(() => {
+            text.innerHTML = ".......";
+            text.classList.add("fade-text");
+          }, 0);
+
+          setTimeout(() => {
+            text.innerHTML = "-Ku Akan Datang Lagi";
+            text.classList.add("fade-text");
+          }, 12200);
+
+          setTimeout(() => {
+            text.innerHTML = "-Meski Ibumu Melarang";
+            text.classList.add("fade-text");
+          }, 17870);
+
+          setTimeout(() => {
+            text.innerHTML = "-Ku Tunjukkan Kesungguhan Untuk, Miliki Dirimu ";
+            text.classList.add("fade-text");
+          }, 23300);
+
+          setTimeout(() => {
+            text.innerHTML =
+              "-Yang Ku Ingin, Bukan Sekedar Hanya Untuk Pacaran";
+            text.classList.add("fade-text");
+            section.classList.add("bg-show");
+          }, 33700);
+
+          setTimeout(() => {
+            text.innerHTML =
+              "-Yang Ku Mau Memberikan Seluruh Cinta Sampai Akhir Waktu Nanti";
+            text.classList.add("fade-text");
+          }, 44900);
+        }
+      });
+    </script>
   </body>
 </html>
