@@ -1,110 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>For You ❤️</title>
-    <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
     <link rel="stylesheet" href="fontawesome-free/css/all.css" />
-    <style>
-      body {
-        overflow: hidden;
-        background-color: #111;
-      }
-
-      #text {
-        color: white;
-        font-size: 24px;
-        font-weight: bold;
-        transition: all 0.5s ease-in-out;
-      }
-
-      /* Efek animasi hati */
-      .heart {
-        position: absolute;
-        color: red;
-        text-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
-        animation: floatUp 2.5s ease-in-out forwards, bounce 0.6s ease-out;
-        opacity: 0.8;
-      }
-
-      @keyframes floatUp {
-        0% {
-          transform: translateY(50px) scale(0.7);
-          opacity: 1;
-        }
-        100% {
-          transform: translateY(-200px) scale(1.2);
-          opacity: 0;
-        }
-      }
-
-      @keyframes bounce {
-        0% {
-          transform: scale(0.5);
-        }
-        50% {
-          transform: scale(1.2);
-        }
-        100% {
-          transform: scale(1);
-        }
-      }
-
-      /* Efek Partikel */
-      .particle {
-        position: absolute;
-        width: 5px;
-        height: 5px;
-        background: rgba(255, 255, 255, 0.8);
-        border-radius: 50%;
-        animation: particleMove 2s linear forwards;
-      }
-
-      @keyframes particleMove {
-        0% {
-          transform: translateY(0) scale(1);
-          opacity: 1;
-        }
-        100% {
-          transform: translateY(-150px) scale(0.5);
-          opacity: 0;
-        }
-      }
-
-      /* Efek api */
-      .fire {
-        position: absolute;
-        width: 10px;
-        height: 10px;
-        background: orange;
-        border-radius: 50%;
-        opacity: 0.8;
-        animation: fireMove 2s linear forwards;
-      }
-
-      @keyframes fireMove {
-        0% {
-          transform: translateY(0) scale(1);
-          opacity: 1;
-        }
-        100% {
-          transform: translateY(200px) scale(0.5);
-          opacity: 0;
-        }
-      }
-    </style>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <section id="section">
-      <div class="container">
-        <div style="height: 100vh" class="row justify-content-center">
-          <div class="col-md-6 align-self-center text-center">
+      <div class="container p-3">
+        <div
+          style="height: 100vh"
+          class="row justify-content-center align-items-center"
+        >
+          <div class="col-md-6 text-center">
             <button
+              style="width: 50px; height: 50px"
               id="btn"
-              style="width: 50px; height: 50px; display: none"
-              class="bg-danger rounded-5 text-white border-0"
+              class="bg-danger text-white rounded-circle border-0"
             >
               <i class="fa fa-play"></i>
             </button>
@@ -114,117 +29,11 @@
       </div>
     </section>
 
-    <audio id="myAudio" preload="auto">
+    <audio id="myAudio">
       <source src="audio.mp3" type="audio/mpeg" />
     </audio>
 
-    <script src="bootstrap/js/bootstrap.bundle.js"></script>
-    <script src="sweetalert2/sweetalert2.all.min.js"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const btn = document.getElementById("btn");
-        const text = document.getElementById("text");
-        const section = document.getElementById("section");
-        const audio = document.getElementById("myAudio");
-        setTimeout(() => {
-          document.getElementById("myAudio").remove();
-          text.innerHTML = "proud of u <i class='fa fa-heart text-white'></i>";
-        }, 58770);
-
-        text.style.fontFamily = "monospace";
-
-        audio.addEventListener("canplaythrough", () => {
-          btn.style.display = "inline-block";
-        });
-
-        btn.addEventListener("click", () => {
-          audio.play();
-          btn.remove();
-          get_text();
-        });
-
-        function get_text() {
-          const texts = [
-            { time: 0, content: "......." },
-            { time: 12200, content: "-Ku Akan Datang Lagi" },
-            { time: 17870, content: "-Meski Ibumu Melarang" },
-            {
-              time: 23300,
-              content: "-Ku Tunjukkan Kesungguhan Untuk, Miliki Dirimu",
-            },
-            {
-              time: 33700,
-              content: "-Yang Ku Ingin, Bukan Sekedar Hanya Untuk Pacaran",
-              effect: showEffects,
-            },
-            {
-              time: 44900,
-              content:
-                "-Yang Ku Mau Memberikan Seluruh Cinta Sampai Akhir Waktu Nanti",
-            },
-          ];
-
-          setInterval(() => {
-            text.classList.remove("fade-text");
-          }, 2000);
-
-          texts.forEach(({ time, content, effect }) => {
-            setTimeout(() => {
-              text.innerHTML = content;
-              text.classList.add("fade-text");
-              if (effect) effect();
-            }, time);
-          });
-        }
-
-        function showEffects() {
-          section.classList.add("bg-show");
-
-          for (let i = 0; i < 20; i++) {
-            setTimeout(() => {
-              createHeart();
-              createParticle();
-              createFire();
-            }, i * 150);
-          }
-        }
-
-        function createHeart() {
-          const heart = document.createElement("i");
-          heart.className = "fa fa-heart heart";
-          heart.style.left = Math.random() * 100 + "vw";
-          heart.style.top = "90vh";
-          document.body.appendChild(heart);
-
-          setTimeout(() => {
-            heart.remove();
-          }, 2500);
-        }
-
-        function createParticle() {
-          const particle = document.createElement("div");
-          particle.className = "particle";
-          particle.style.left = Math.random() * 100 + "vw";
-          particle.style.top = "90vh";
-          document.body.appendChild(particle);
-
-          setTimeout(() => {
-            particle.remove();
-          }, 2000);
-        }
-
-        function createFire() {
-          const fire = document.createElement("div");
-          fire.className = "fire";
-          fire.style.left = Math.random() * 100 + "vw";
-          fire.style.top = "90vh";
-          document.body.appendChild(fire);
-
-          setTimeout(() => {
-            fire.remove();
-          }, 2000);
-        }
-      });
-    </script>
+    <script src="bootstrap/js/bootstrap.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>

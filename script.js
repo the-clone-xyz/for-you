@@ -1,25 +1,21 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
   const btn = document.getElementById("btn");
   const text = document.getElementById("text");
-  const section = document.getElementById("section");
   const audio = document.getElementById("myAudio");
-  setTimeout(() => {
-    document.getElementById("myAudio").remove();
-  }, 58770);
+  const section = document.getElementById("section");
 
-  text.style.fontFamily = "monospace";
-
-  audio.addEventListener("canplaythrough", () => {
-    btn.style.display = "inline-block";
-  });
+  let isPlaying = false;
 
   btn.addEventListener("click", () => {
-    audio.play();
-    btn.remove();
-    get_text();
+    if (!isPlaying) {
+      isPlaying = true;
+      audio.play();
+      btn.remove();
+      startTextAnimation();
+    }
   });
 
-  function get_text() {
+  function startTextAnimation() {
     const texts = [
       { time: 0, content: "......." },
       { time: 12200, content: "-Ku Akan Datang Lagi" },
@@ -38,26 +34,29 @@ document.addEventListener("DOMContentLoaded", function () {
         content:
           "-Yang Ku Mau Memberikan Seluruh Cinta Sampai Akhir Waktu Nanti",
       },
+      {
+        time: 58770,
+        content: "Proud of U <i class='fa fa-heart text-white'></i>",
+      },
     ];
 
     texts.forEach(({ time, content, effect }) => {
       setTimeout(() => {
         text.innerHTML = content;
-        text.classList.add("fade-text");
+        text.classList.add("fade-in");
         if (effect) effect();
       }, time);
     });
+
+    setTimeout(() => {
+      audio.pause();
+    }, texts[texts.length - 1].time + 2000);
   }
 
   function showEffects() {
-    section.classList.add("bg-show");
-
+    document.body.classList.add("bg-show");
     for (let i = 0; i < 20; i++) {
-      setTimeout(() => {
-        createHeart();
-        createParticle();
-        createFire();
-      }, i * 150);
+      setTimeout(createHeart, i * 150);
     }
   }
 
@@ -68,32 +67,6 @@ document.addEventListener("DOMContentLoaded", function () {
     heart.style.top = "90vh";
     document.body.appendChild(heart);
 
-    setTimeout(() => {
-      heart.remove();
-    }, 2500);
-  }
-
-  function createParticle() {
-    const particle = document.createElement("div");
-    particle.className = "particle";
-    particle.style.left = Math.random() * 100 + "vw";
-    particle.style.top = "90vh";
-    document.body.appendChild(particle);
-
-    setTimeout(() => {
-      particle.remove();
-    }, 2000);
-  }
-
-  function createFire() {
-    const fire = document.createElement("div");
-    fire.className = "fire";
-    fire.style.left = Math.random() * 100 + "vw";
-    fire.style.top = "90vh";
-    document.body.appendChild(fire);
-
-    setTimeout(() => {
-      fire.remove();
-    }, 2000);
+    setTimeout(() => heart.remove(), 2500);
   }
 });
